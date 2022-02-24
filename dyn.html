@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <title>JavaScript print array</title>
+</head>
+
+<body>
+  <input type="text"  onkeypress="myFun()" id="search"   placeholder="Search for names..">
+   <p id="list"  onclick="remove()">  </p>
+      
+
+<script>
+    let myarray = [];
+    var id=0;
+    
+    function myFun() {
+      var searchItem = document.getElementById("search");
+      searchItem.addEventListener('keyup', (event) => {
+        if (event.code === 'Enter') {
+          if (event.target.value) {
+            KeyPressed(event.target.value)
+          }
+        }
+      });
+    }
+
+    function KeyPressed(data) {
+      console.log(myarray.some((it)=>it.firstName===data))
+      if(myarray.some((it)=>it.firstName===data)){
+          return 
+      }
+      let person = {
+        id:id,
+        firstName: null,
+       }; 
+      person.firstName = data;
+      myarray.push(person);
+      id ++;
+      document.getElementById("list").innerHTML += "<option>" + document.getElementById("search").value + " </option>";
+      document.getElementById("search").value = null;
+      console.log(myarray);
+      }
+
+
+     function remove() {
+      addEventListener('click', function (event) {
+        if (event.target.value) {
+       myarray = myarray.filter((it) => it.firstName !== event.target.value)
+    }
+   
+    
+    console.log('my array', myarray);
+      });
+  }
+     
+     addEventListener("keyup", function (event) {
+      let list = " "; 
+      search = document.getElementById('search').value;
+      myarray.filter((it) => it.firstName.indexOf(search) >-1).map((it) => {
+      return list += `<option>${it.firstName}</option>`
+       });
+        document.getElementById("list").innerHTML=list;  
+        });
+
+
+  </script> 
+</body> 
+</html>
+
+
+
